@@ -6,13 +6,15 @@ use CodeIgniter\Model;
 
 class UserModel extends Model
 {
-    protected $table            = 'users';
-    protected $primaryKey       = 'id';
+    protected $table            = 'usuario';
+    protected $primaryKey       = 'usr_id';
     protected $useAutoIncrement = true;
-    protected $returnType       = 'array';
+    protected $returnType       = 'object';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [];
+    protected $allowedFields    = [
+        'usr_nome', 'usr_email','usr_cpf','usr_senha','usr_usuario_tipo_id','usr_ativo'
+    ];
 
     // Dates
     protected $useTimestamps = false;
@@ -22,8 +24,19 @@ class UserModel extends Model
     protected $deletedField  = 'deleted_at';
 
     // Validation
-    protected $validationRules      = [];
-    protected $validationMessages   = [];
+    protected $validationRules      = [
+        'usr_email'         => 'required|max_length[150]|valid_email|is_unique[usuario.usr_email,usr_id,{usr_id}]',
+        'senha'             => 'required|max_length[50]',
+        'senha_confirmar'   => 'required|max_length[50]|matches[senha]'
+    ];
+
+    protected $validationMessages   = [
+        'usr_email' => [
+            'is_unique'     => 'Atenção! Este e-mail já existe em nosso sistema.',
+            'max_length'    => 'O campo e-mail deve ter 150 caracteres',
+            'valid_email'   => 'Por favor, digitar e-mail correto'
+        ],
+    ];
     protected $skipValidation       = false;
     protected $cleanValidationRules = true;
 

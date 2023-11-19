@@ -14,6 +14,8 @@ $routes->get('/logout', 'Backend\Login::doLogOut', ['as' => 'back.logOut']);
 
 $routes->get('/home', 'Backend\Home::index', ['as' => 'back.home.index']);
 
-// $routes->group('blog', ['namespace' => 'Acme\Blog\Controllers'], static function ($routes) {
-//     $routes->get('/', 'Blog::index');
-// });
+$routes->group('usuario', ['namespace' => 'App\Controllers\Backend'], static function ($routes) {
+
+    $routes->get('lista', 'UserController::index', ['as' => 'back.user.index']);
+
+});

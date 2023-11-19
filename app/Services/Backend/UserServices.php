@@ -14,8 +14,8 @@ class UserServices
         $this->userModel = Factories::class(UserModel::class);
     }
 
-    public function index()
+    public function getAll()
     {
-        //
+        return $this->userModel->findAll();
     }
 }
