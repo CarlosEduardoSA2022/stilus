@@ -20,7 +20,7 @@
         <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <a href="#" class="btn btn-primary">Novo Usuário</a>
+                <a href="<?= route_to('back.user.create')?>" class="btn btn-primary">Novo Usuário</a>
             </div>
             <div class="card-body">
             <div class="table-responsive">

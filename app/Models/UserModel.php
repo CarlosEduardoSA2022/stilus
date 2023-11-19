@@ -26,8 +26,7 @@ class UserModel extends Model
     // Validation
     protected $validationRules      = [
         'usr_email'         => 'required|max_length[150]|valid_email|is_unique[usuario.usr_email,usr_id,{usr_id}]',
-        'senha'             => 'required|max_length[50]',
-        'senha_confirmar'   => 'required|max_length[50]|matches[senha]'
+        'usr_senha'         => 'required|max_length[60]',
     ];
 
     protected $validationMessages   = [

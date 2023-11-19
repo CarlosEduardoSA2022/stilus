@@ -1,5 +1,6 @@
 <head>
   <meta charset="UTF-8">
+  <meta name="<?= csrf_token();?>" content="<?= csrf_hash();?>" class="csrf">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
   <title>Stilus</title>
 

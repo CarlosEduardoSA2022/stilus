@@ -19,6 +19,24 @@ class UserServices
         return $this->userModel->findAll();
     }
 
+    public function existUserByEmail(string $email): bool
+    {
+        $return = false;
+
+        $user = $this->userModel->where('usr_email', $email)->first();
+
+        if($user) $return = true;
+
+        return $return;
+    }
+
+    public function store(array $user): array
+    {
+        if(!$userId = $this->userModel->insert($user)) return $this->userModel->errors();
+
+        return ['usr_id' => $userId, 'success' => true];
+    }
+
     public function updateStatusUser(int $userID)
     {
         $user = $this->userModel->find($userID);

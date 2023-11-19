@@ -16,8 +16,12 @@ $routes->get('/home', 'Backend\Home::index', ['as' => 'back.home.index']);
 
 $routes->group('usuario', ['namespace' => 'App\Controllers\Backend'], static function ($routes) {
 
+    $routes->get('adicionar', 'UserController::adicionar', ['as' => 'back.user.create']);
+
     $routes->get('lista', 'UserController::index', ['as' => 'back.user.index']);
 
     $routes->post('ativa-inativa/(:num)', 'UserController::updateStatusUser/$1', ['as' => 'back.user.ativar']);
+
+    $routes->post('novo', 'UserController::store', ['as' => 'back.user.store']);
 
 });
