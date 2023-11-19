@@ -18,4 +18,6 @@ $routes->group('usuario', ['namespace' => 'App\Controllers\Backend'], static fun
 
     $routes->get('lista', 'UserController::index', ['as' => 'back.user.index']);
 
+    $routes->post('ativa-inativa/(:num)', 'UserController::updateStatusUser/$1', ['as' => 'back.user.ativar']);
+
 });

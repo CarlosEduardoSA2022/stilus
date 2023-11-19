@@ -19,10 +19,17 @@ class UserController extends BaseController
     {
         if(!session()->has('loggedIn')) return redirect()->route('back.login');
 
+        if(session('userInfo')->usr_usuario_tipo_id != 1) return redirect()->route('back.login');
+
         $payLoad = [
             'users' => $this->userServices->getAll()
         ];
         
         return view('backend/user/index', $payLoad);
+    }
+
+    public function updateStatusUser(int $userID)
+    {
+        $this->userServices->updateStatusUser($userID);
     }
 }

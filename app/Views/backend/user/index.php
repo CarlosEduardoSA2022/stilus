@@ -50,16 +50,14 @@
                             </td>
 
                             <td>
-                                
+                                <?php if($user->usr_id != session('userInfo')->usr_id): ?>
                                 <div class="form-check">
-                                    <input id="<?= $user->usr_id ?>" class="form-check-input" type="checkbox">
-                                    <label for="<?= $user->usr_id ?>" class="form-check-label">
-                                        <?= $user->usr_ativo == 1 ? 'Ativo' : 'Inativo' ?>
-                                    </label>
-                                </div>                                
+                                    <input id="<?= $user->usr_id ?>" onclick="activeUser(this, <?= $user->usr_id ?>)" <?= $user->usr_ativo == 1 ? 'Checked' : '' ?> class="form-check-input" type="checkbox">
+                                </div>
+                                <?php endif;?>
                             </td>
 
-                            <td><a href="#" class="btn btn-secondary">Detalhes</a></td>
+                            <td><a href="#" class="btn btn-secondary">Alterar</a></td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
@@ -79,6 +77,7 @@
   <script src="<?= base_url()?>assets/backend/modules/datatables/Select-1.2.4/js/dataTables.select.min.js"></script>
 
   <!-- Page Specific JS File -->
-  <script src="<?= base_url()?>assets/backend/js/app/user/user.index.js"> </script>
-  
+  <?= $this->include('backend/user/inc/_index'); ?>
+  <?= $this->include('backend/user/inc/_update'); ?>
+
 <?= $this->endSection() ?>

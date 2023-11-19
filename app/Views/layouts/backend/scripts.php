@@ -8,6 +8,7 @@
   <script src="<?= base_url() ?>assets/backend/js/stisla.js"></script>
   
   <!-- JS Libraies -->
+  <script src="<?= base_url() ?>assets/backend/modules/sweetalert/sweetalert.min.js"></script>
 
   <!-- Page Specific JS File -->
   
