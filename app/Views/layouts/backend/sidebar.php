@@ -10,7 +10,7 @@
         <ul class="sidebar-menu">
             <li class="menu-header">Principal</li>
             
-            <li><a class="nav-link" href="blank.html"><i class="fas fa-th-large"></i> <span>Listar Produtos</span></a></li>
+            <li><a class="nav-link" href="<?= route_to('back.product.index')?>"><i class="fas fa-th-large"></i> <span>Listar Produtos</span></a></li>
             
             <?php if(session("userInfo")->usr_usuario_tipo_id == 1 ):?>
                 <li><a class="nav-link" href="<?= route_to('back.user.index')?>"><i class="far fa-user"></i> <span>Listar Usuários</span></a></li>

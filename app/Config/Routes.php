@@ -29,3 +29,12 @@ $routes->group('usuario', ['namespace' => 'App\Controllers\Backend'], static fun
     $routes->get('alterar/(:num)', 'UserController::edit/$1', ['as' => 'back.user.edit']);
 
 });
+
+$routes->group('produto', ['namespace' => 'App\Controllers\Backend'], static function ($routes) {
+
+    //$routes->get('adicionar', 'UserController::adicionar', ['as' => 'back.user.create']);
+
+    $routes->get('lista', 'ProdutoController::index', ['as' => 'back.product.index']);
+
+
+});
