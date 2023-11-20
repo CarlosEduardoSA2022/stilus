@@ -59,6 +59,17 @@ class UserController extends BaseController
         return redirect()->back();
     }
 
+    public function edit(int $userId)
+    {
+        if(session('userInfo')->usr_id == $userId) return redirect()->back();
+
+        $payLoad = [
+            'user' => $this->userServices->getUserById($userId)
+        ];
+
+        return view('backend/user/edit', $payLoad);
+    }
+
     public function updateStatusUser(int $userID)
     {
         $this->userServices->updateStatusUser($userID);

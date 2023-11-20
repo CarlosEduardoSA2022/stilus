@@ -30,6 +30,11 @@ class UserServices
         return $return;
     }
 
+    public function getUserById(int $userId): object
+    {
+        return $this->userModel->find($userId);
+    }
+
     public function store(array $user): array
     {
         if(!$userId = $this->userModel->insert($user)) return $this->userModel->errors();
@@ -43,4 +48,5 @@ class UserServices
 
         $this->userModel->where('usr_id', $userID)->set('usr_ativo', !$user->usr_ativo)->update();
     }
+
 }

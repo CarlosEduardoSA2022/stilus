@@ -57,7 +57,11 @@
                                 <?php endif;?>
                             </td>
 
-                            <td><a href="#" class="btn btn-secondary">Alterar</a></td>
+                            <td>
+                                <?php if($user->usr_id != session('userInfo')->usr_id): ?>
+                                    <a href="<?= route_to('back.user.edit', $user->usr_id)?>" class="btn btn-secondary">Alterar</a>
+                                <?php endif;?>
+                            </td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
