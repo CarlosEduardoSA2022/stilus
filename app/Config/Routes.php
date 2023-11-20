@@ -24,6 +24,8 @@ $routes->group('usuario', ['namespace' => 'App\Controllers\Backend'], static fun
 
     $routes->post('novo', 'UserController::store', ['as' => 'back.user.store']);
 
+    $routes->post('alterar', 'UserController::update', ['as' => 'back.user.update']);
+
     $routes->get('alterar/(:num)', 'UserController::edit/$1', ['as' => 'back.user.edit']);
 
 });

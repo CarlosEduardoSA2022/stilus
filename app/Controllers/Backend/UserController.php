@@ -63,12 +63,52 @@ class UserController extends BaseController
     {
         if(session('userInfo')->usr_id == $userId) return redirect()->back();
 
+        $user = $this->userServices->getUserById($userId);
+
+        if(!$user) return redirect()->back();
+
         $payLoad = [
-            'user' => $this->userServices->getUserById($userId)
+            'user' => $user
         ];
 
         return view('backend/user/edit', $payLoad);
     }
+
+    public function update()
+    {
+        $payLoad = $this->request->getPost();
+
+        $userId = $payLoad['usr_id'] ;
+
+        $payLoad['usr_cpf'] = str_replace('-', '', str_replace('.', '', $payLoad['usr_cpf']));
+
+        $payLoad['usr_senha'] = password_hash($payLoad['usr_senha'], PASSWORD_DEFAULT);
+
+        $payLoad['usr_ativo'] = $payLoad['usr_ativo'] == '0' ? 0 : 1;
+
+        if($payLoad['alterPassword'] == '0'){
+
+            unset($payLoad['alterPassword']);
+
+            unset($payLoad['usr_senha']);
+
+            unset($payLoad['senha_confirmar']);
+
+        }
+
+        unset($payLoad['usr_id']);
+
+        unset($payLoad['senha_confirmar']);
+
+        unset($payLoad['alterPassword']);
+
+        $this->userServices->update($userId, $payLoad);
+
+        $this->session->setFlashdata('sucesso', '<div style="margin-top: 15px;"  class="alert alert-success">
+        <div class="alert-title">Sucesso</div>Usuário alterado com sucesso!</div>');  
+        
+        return redirect()->back();
+    }    
 
     public function updateStatusUser(int $userID)
     {

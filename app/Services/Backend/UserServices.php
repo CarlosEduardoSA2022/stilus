@@ -30,7 +30,7 @@ class UserServices
         return $return;
     }
 
-    public function getUserById(int $userId): object
+    public function getUserById(int $userId): object|Null
     {
         return $this->userModel->find($userId);
     }
@@ -41,6 +41,13 @@ class UserServices
 
         return ['usr_id' => $userId, 'success' => true];
     }
+
+    public function update(int $userId, array $user): array
+    {
+        if(!$this->userModel->update($userId, $user)) return $this->userModel->errors();
+
+        return ['success' => true];
+    }    
 
     public function updateStatusUser(int $userID)
     {

@@ -16,7 +16,8 @@
     <div class="row">
         <div class="col-12 col-md-6 col-lg-6">
             <div class="card">
-                <form action="#" method="post" class="needs-validation" novalidate="">
+                <form action="<?= route_to('back.user.update') ?>" method="post" class="needs-validation" novalidate="">
+                    <input type="hidden" value="<?= $user->usr_id?>" name="usr_id">
                     <div class="card-body">
 
                         <div class="form-group">
@@ -46,6 +47,7 @@
 
                         <div class="form-group mb-3">
                             <div class="form-check">
+                                <input type="hidden" name="alterPassword" value="0">
                                 <input class="form-check-input" type="checkbox" id="alterPassword" name="alterPassword">
                                 <label class="form-check-label" for="alterPassword">
                                 Alterar senha?
@@ -56,14 +58,14 @@
                         <div id="divSenha" class="form-row d-none">
                             <div class="form-group col-md-6">
                                 <label for="usr_senha">Senha</label>
-                                <input id="usr_senha" name="usr_senha" type="password" class="form-control" placeholder="Senha" tabindex="4" required>
+                                <input id="usr_senha" name="usr_senha" type="password" class="form-control" placeholder="Senha" tabindex="4">
                                 <div class="invalid-feedback">
                                     Por favor, digite a senha
                                 </div>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="senha_confirmar">Confirmação de Senha</label>
-                                <input id="senha_confirmar" name="senha_confirmar" type="password" class="form-control" placeholder="Confirmar Senha" tabindex="5" required>
+                                <input id="senha_confirmar" name="senha_confirmar" type="password" class="form-control" placeholder="Confirmar Senha" tabindex="5">
                                 <div class="invalid-feedback">
                                     Por favor, digite a confirmação de senha
                                 </div>
@@ -84,6 +86,8 @@
                                 </div>                                
 
                                 <div style="margin-top: 20px;" class="form-check">
+                                    <input type="hidden" name="usr_ativo" value="0">
+                                    
                                     <input id="usr_ativo" name="usr_ativo" class="form-check-input" type="checkbox" <?= $user->usr_ativo == 1 ? 'checked' : ''?>>
                                     <label class="form-check-label" for="usr_ativo">
                                         Ativo
@@ -116,6 +120,10 @@
         $('#alterPassword').change(() =>{
             if($('#alterPassword').is(":checked")) {
 
+                $("#usr_senha").attr("required", "req");
+
+                $("#senha_confirmar").attr("required", "req");              
+
                 $("#divSenha").removeClass("d-none");
 
             }else{
@@ -123,6 +131,10 @@
                 $('#usr_senha').val('');
 
                 $('#senha_confirmar').val('');
+
+                $("#usr_senha").removeAttr("required");
+
+                $("#senha_confirmar").removeAttr("required");
 
                 $("#divSenha").addClass("d-none");
             }
