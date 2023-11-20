@@ -28,7 +28,6 @@
                         </div>
 
                         <div class="form-row">
-
                             <div class="form-group col-md-4">
                                 <label for="prd_preco">Preço</label>
                                 <input id="prd_preco" name="prd_preco" class="form-control money" type="text" tabindex="2" required/>
@@ -50,17 +49,28 @@
 
                         <div class="form-row">
                             <div class="form-group col-md-12">
-
-                            <div class="form-group">
-                                <label>Descrição</label>
-                                <textarea class="form-control" maxlength="2000" tabindex="5"></textarea>
-                            </div>                            
-                            
+                                <div class="form-group">
+                                    <label>Descrição</label>
+                                    <textarea class="form-control" maxlength="2000" tabindex="5"></textarea>
+                                </div>
                             </div>
-                        </div>                        
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <div class="section-title">Imagem do Padão</div>
+                                <input id="imagemPadrao" name="imagemPadrao" type="file" multiple ="form-control">
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <div class="section-title">Imagens do Produto</div>
+                                <input id="imagensProduto" name="imagensProduto" type="file" multiple ="form-control">
+                            </div>
+
+                        </div>  
 
                         <div class="form-row">
-                            <div class="form-group col-md-12">
+                            <div class="form-group col-md-6">
                                    <div class="form-check">
                                     <input id="usr_ativo" name="usr_ativo" class="form-check-input" type="checkbox" checked disabled>
                                     <label class="form-check-label" for="usr_ativo">
@@ -77,8 +87,11 @@
 
                         if(session('sucesso')){ echo session('sucesso');}
                     ?>
+
                     <div class="card-footer">
-                        <input class="btn btn-primary" type="submit" value="Salvar"> | <a href="<?= route_to('back.product.index')?>">Voltar para lista</a>
+                        <input class="btn btn-primary" type="submit" value="Salvar" /> |
+                            <a href="<?= route_to('back.product.index')?>">Voltar para lista</a>
+                        
                     </div>
                 </form>
             </div>
