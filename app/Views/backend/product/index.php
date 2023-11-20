@@ -20,7 +20,7 @@
         <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <a href="<?= route_to('back.user.create')?>" class="btn btn-primary btn-icon icon-left">
+                <a href="<?= route_to('back.product.create')?>" class="btn btn-primary btn-icon icon-left">
                     <i class="fas fa-plus"></i>Novo Produto
                 </a>
             </div>

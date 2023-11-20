@@ -25,4 +25,9 @@ class ProdutoController extends BaseController
         
         return view('backend/product/index', $payLoad);
     }
+
+    public function create()
+    {
+        return view('backend/product/create');
+    }    
 }

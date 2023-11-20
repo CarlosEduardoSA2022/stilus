@@ -32,7 +32,7 @@ $routes->group('usuario', ['namespace' => 'App\Controllers\Backend'], static fun
 
 $routes->group('produto', ['namespace' => 'App\Controllers\Backend'], static function ($routes) {
 
-    //$routes->get('adicionar', 'UserController::adicionar', ['as' => 'back.user.create']);
+    $routes->get('adicionar', 'ProdutoController::create', ['as' => 'back.product.create']);
 
     $routes->get('lista', 'ProdutoController::index', ['as' => 'back.product.index']);
 
