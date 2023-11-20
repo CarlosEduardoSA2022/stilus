@@ -14,67 +14,54 @@
     <h2 class="section-title">Adicionar Produto</h2>
 
     <div class="row">
-        <div class="col-12 col-md-6 col-lg-6">
+        <div class="col-12 col-md-8 col-lg-8">
             <div class="card">
                 <form action="#" method="post" class="needs-validation" novalidate="">
                     <div class="card-body">
 
                         <div class="form-group">
                             <label for="usr_nome">Nome</label>
-                            <input id="usr_nome" name="usr_nome" type="text" class="form-control" placeholder="Nome do Usuário" tabindex="1" required autofocus>
+                            <input id="usr_nome" name="usr_nome" type="text" class="form-control" placeholder="Nome do Produto" maxlength="200" tabindex="1" required autofocus>
                             <div class="invalid-feedback">
-                                Por favor, digite seu Nome
+                                Por favor, digite o Nome do Produto
                             </div>
                         </div>
 
                         <div class="form-row">
-                            <div class="form-group col-md-8">
-                                <label for="usr_email">E-Mail</label>
-                                <input id="usr_email" name="usr_email" type="email" class="form-control" placeholder="E-Mail do Usuário" tabindex="2" required>
-                                <div class="invalid-feedback">
-                                    Por favor, digite seu E-Mail, precisar ser um e-mail válido
-                                </div>  
-                            </div>
-                            <div class="form-group col-md-4">
-                                <label for="usr_cpf">CPF</label>
-                                <input id="usr_cpf" name="usr_cpf" type="text" maxlength="14" class="form-control cpf" placeholder="CPF" tabindex="3" required>
-                                <div class="invalid-feedback">
-                                    Por favor, digite o CPF 
-                                </div>
-                            </div>
-                        </div>                        
 
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label for="usr_senha">Senha</label>
-                                <input id="usr_senha" name="usr_senha" type="password" class="form-control" placeholder="Senha" tabindex="4" required>
+                            <div class="form-group col-md-4">
+                                <label for="prd_preco">Preço</label>
+                                <input id="prd_preco" name="prd_preco" class="form-control money" type="text" tabindex="2" required/>
                                 <div class="invalid-feedback">
-                                    Por favor, digite a senha
-                                </div>
+                                    Por favor, digite o Preço do Produto
+                                </div>                                
                             </div>
-                            <div class="form-group col-md-6">
-                                <label for="senha_confirmar">Confirmação de Senha</label>
-                                <input id="senha_confirmar" name="senha_confirmar" type="password" class="form-control" placeholder="Confirmar Senha" tabindex="5" required>
-                                <div class="invalid-feedback">
-                                    Por favor, digite a confirmação de senha
-                                </div>
+
+                            <div class="form-group col-md-2">
+                                <label for="prd_avaliacao">Avaliação</label>
+                                <input id="prd_avaliacao" name="prd_avaliacao" type="number" class="form-control" onchange="setTwoNumberDecimal" min="1" max="5" step="0.5"  tabindex="3"/>
                             </div>
+
+                            <div class="form-group col-md-2">
+                                <label for="pro_quantidade">Quantidade</label>
+                                <input id="pro_quantidade" name="pro_quantidade" class="form-control" value="0" min="0" type="number" tabindex="4" />
+                            </div>                            
                         </div>
 
                         <div class="form-row">
                             <div class="form-group col-md-12">
-                                <label for="inputState">Grupo</label>
-                                <select id="usr_usuario_tipo_id" name="usr_usuario_tipo_id" class="form-control" tabindex="6" required >
-                                    <option value="" selected>Selecione...</option>
-                                    <option value="1">Administrador</option>
-                                    <option value="2">Estoquista</option>
-                                    <option value="3">Cliente</option>
-                                </select>
-                                <div class="invalid-feedback">
-                                    Por favor, selecione o Grupo do Usuário
-                                </div>                                
 
-                                <div style="margin-top: 20px;" class="form-check">
+                            <div class="form-group">
+                                <label>Descrição</label>
+                                <textarea class="form-control" maxlength="2000" tabindex="5"></textarea>
+                            </div>                            
+                            
+                            </div>
+                        </div>                        
+
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                   <div class="form-check">
                                     <input id="usr_ativo" name="usr_ativo" class="form-check-input" type="checkbox" checked disabled>
                                     <label class="form-check-label" for="usr_ativo">
                                         Ativo
@@ -82,7 +69,9 @@
                                 </div>
                             </div>
                         </div>
+
                     </div>
+
                     <?php
                         if(session('mensagem')){ echo session('mensagem');}
 
@@ -100,8 +89,49 @@
 
 <?= $this->section('custom-script')?> 
     <!-- JS Libraies -->
-
+    <script src="<?= base_url() ?>assets/backend/modules/jquery-mask/jquery.mask.min.js"></script>
 
   <!-- Page Specific JS File -->
+  <script>
+    $('.money').mask('000.000.000.000.000,00', {reverse: true});
+
+    $("#prd_avaliacao").on("blur", ()=>{
+        if($("#prd_avaliacao").val() != '' && parseFloat($("#prd_avaliacao").val()) > 5.0){
+
+            $("#prd_avaliacao").focus();
+
+            $("#prd_avaliacao").val('5'); 
+
+            swal("Atenção!", "A avaliação é até 5", "warning")
+            .then((value) => {
+                $("#prd_avaliacao").focus();
+            });
+        }
+    });
+
+    $("#pro_quantidade").on("blur", ()=>{
+
+        if($("#pro_quantidade").val() != '' && $("#pro_quantidade").val().includes(".")) {
+
+            $("#pro_quantidade").focus();
+
+            $("#pro_quantidade").val(''); 
+
+            swal("Atenção!", "A quantidade precisa ser um número inteiro", "warning")
+            .then((value) => {
+                $("#pro_quantidade").focus();
+            });            
+
+        }
+
+    })
+
+    const setTwoNumberDecimal = (event) => {
+
+        this.value = parseFloat(this.value).toFixed(1);
+
+    }
+
+  </script>
 
 <?= $this->endSection() ?>
