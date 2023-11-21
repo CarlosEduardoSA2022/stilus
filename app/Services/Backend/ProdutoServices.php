@@ -25,8 +25,15 @@ class ProdutoServices
 
     public function store(array $product): array
     {
-        if(!$id = $this->produtoModel->insert($product)) return $this->produtoModel->errors();
+        if(!$id = $this->produtoModel->insert($product)) return ['errors' => $this->produtoModel->errors(), 'success' => false];
 
         return ['prd_id' => $id, 'success' => true];
+    }
+
+    public function storeImage(array $image): array
+    {
+        if(!$id = $this->imagemModel->insert($image)) return ['errors' => $this->imagemModel->errors(), 'success' => false];
+
+        return ['pri_id' => $id, 'success' => true];
     }    
 }

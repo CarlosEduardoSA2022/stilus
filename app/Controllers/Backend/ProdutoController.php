@@ -35,10 +35,112 @@ class ProdutoController extends BaseController
     {
         $payLoad = $this->request->getPost();
 
-        $this->produtoService->store($payLoad);
+        $productNew = $this->produtoService->store($payLoad);
+
+        if(!$productNew['success']){
+
+            $startMessage = '<div style="margin-top: 15px;"  class="alert alert-warning"> <div class="alert-title">Atenção!</div>';
+
+            $boryMessage = '';
+
+            foreach ($productNew['errors'] as $error => $value) $boryMessage = $boryMessage . "<p>" . $value . '</p>';
+
+            $boryMessage = $boryMessage . '</div>';
+
+            $this->session->setFlashdata('errors',  $startMessage . $boryMessage );
+
+            return redirect()->back();
+        }
+
+        $produtctID = $productNew['prd_id'];
+
+        $imagemPadrao = $this->request->getFile('imagemPadrao');
+
+        $imagemsProduto = $this->request->getFileMultiple('imagensProduto');
+
+        $caminhoImagem = base_url().'uploads/products/';
+
+        if($imagemsProduto[0]->getName() != ''){
+
+            foreach ($imagemsProduto as $imagem) {
+                
+                if ($imagem->isValid() && !$imagem->hasMoved()){
+
+                    $nomeImagem = $imagem->getRandomName();
+
+                    $newImage = [
+                        'pri_produto_id'        => $produtctID,
+                        'pri_caminho_imagem'    => $caminhoImagem,
+                        'pri_nome_imagem'       => $nomeImagem,
+                        'pri_padrao'            => 0,
+                        'pri_ativa'             => 1
+                    ];   
+
+                    $imagem->store('../../public/uploads/products', $nomeImagem);
+
+                    $this->produtoService->storeImage($newImage);
+                }
+            }
+        }
+
+        if ($imagemPadrao->getName() != '' && !$this->validate([
+          'imagemPadrao' => 'uploaded[imagemPadrao]|is_image[imagemPadrao]|ext_in[imagemPadrao,jpeg,png,jpg,svg]'
+        ], [
+          'imagemPadrao' => [
+            'uploaded' => 'Escolha uma imagem padrão',
+            'is_image' => 'O que você escolheu não é uma imagem',
+            'ext_in' => 'A extensão ' . $imagemPadrao->getExtension() . ' não é válida',
+          ]
+        ])) {
+            $errors['errors'] = $this->validator->getErrors();
+
+            $startMessage = '<div style="margin-top: 15px;"  class="alert alert-warning"> <div class="alert-title">Atenção!</div>';
+
+            $boryMessage = '';
+
+            foreach ($errors['errors'] as $error => $value) $boryMessage = $boryMessage . "<p>" . $value . '</p>';
+
+            $boryMessage = $boryMessage . '</div>';
+
+            $this->session->setFlashdata('errors',  $startMessage . $boryMessage );
+
+            return redirect()->back();
+        }
+
+        $nomeImagemPadrao = $imagemPadrao->getRandomName();
+
+        if ($imagemPadrao->isValid() && !$imagemPadrao->hasMoved()) {
+            
+            $imagemPadrao->store('../../public/uploads/products', $nomeImagemPadrao);
+
+            $newImageDefault = [
+                'pri_produto_id'        => $produtctID,
+                'pri_caminho_imagem'    => $caminhoImagem,
+                'pri_nome_imagem'       => $nomeImagemPadrao,
+                'pri_padrao'            => 1,
+                'pri_ativa'             => 1
+            ];
+
+            $imageDefaultNew = $this->produtoService->storeImage($newImageDefault);
+
+            if(!$imageDefaultNew['success']){
+
+                $startMessage = '<div style="margin-top: 15px;"  class="alert alert-warning"> <div class="alert-title">Atenção!</div>';
+    
+                $boryMessage = '';
+    
+                foreach ($imageDefaultNew['errors'] as $error => $value) $boryMessage = $boryMessage . "<p>" . $value . '</p>';
+    
+                $boryMessage = $boryMessage . '</div>';
+    
+                $this->session->setFlashdata('errors',  $startMessage . $boryMessage );
+    
+                return redirect()->back();
+            }
+        }
 
         $this->session->setFlashdata('sucesso', '<div style="margin-top: 15px;"  class="alert alert-success">
-        <div class="alert-title">Sucesso</div>Usuário cadastrado com sucesso!</div>');  
+        <div class="alert-title">Sucesso</div>Produto cadastrado com sucesso!</div>');  
         
         return redirect()->back();
     }    

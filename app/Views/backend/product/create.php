@@ -56,17 +56,17 @@
                             </div>
                         </div>
                         
-                        <!-- <div class="form-row">
+                        <div class="form-row">
                             <div class="form-group col-md-6">
-                                <div class="section-title">Imagem do Padão</div>
+                                <div class="section-title">Imagem Padão <small class="text text-primary">Ficará em destaque na loja.</small></div>
                                 <input id="imagemPadrao" name="imagemPadrao" type="file" accept="image/*" class="form-control">
                             </div>
 
                             <div class="form-group col-md-6">
                                 <div class="section-title">Imagens do Produto</div>
-                                <input id="imagensProduto" name="imagensProduto" type="file" accept="image/*" multiple class="form-control">
+                                <input id="imagensProduto" name="imagensProduto[]" type="file" accept="image/*" multiple class="form-control">
                             </div>
-                        </div>   -->
+                        </div>
 
                         <div class="form-row">
                             <div class="form-group col-md-6">
@@ -83,7 +83,7 @@
                     </div>
 
                     <?php
-                        if(session('mensagem')){ echo session('mensagem');}
+                        if(session('errors')){ echo session('errors');}
 
                         if(session('sucesso')){ echo session('sucesso');}
                     ?>
@@ -152,9 +152,9 @@
 
         switch (ext) {
             case 'jpg':
-            case 'bmp':
             case 'png':
-            case 'tif':
+            case 'svg':
+            case 'jpeg':
             break;
             default:
             swal("Atenção!", "Arquivo selecionado não é válido", "warning")

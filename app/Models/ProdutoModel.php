@@ -29,7 +29,17 @@ class ProdutoModel extends Model
         'prd_descricao' => 'max_length[2000]',
     ];
     
-    protected $validationMessages   = [];
+    protected $validationMessages   = [
+        'prd_nome' => [
+            'required'     => 'O nome do produto precisa ser preenchido.',
+            'max_length'    => 'O nome do produto aceita no máximo 200 caracters.',
+        ],
+
+        'prd_descricao' => [
+            'max_length'    => 'A descrição do produto aceita no máximo 2000 caracters.',
+        ],        
+        
+    ];
     protected $skipValidation       = false;
     protected $cleanValidationRules = true;
 
