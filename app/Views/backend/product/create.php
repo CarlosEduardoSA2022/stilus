@@ -16,12 +16,12 @@
     <div class="row">
         <div class="col-12 col-md-8 col-lg-8">
             <div class="card">
-                <form action="#" method="post" class="needs-validation" novalidate="">
+                <form action="<?= route_to('back.product.store')?>" method="post" class="needs-validation" novalidate=""  enctype="multipart/form-data">
                     <div class="card-body">
 
                         <div class="form-group">
-                            <label for="usr_nome">Nome</label>
-                            <input id="usr_nome" name="usr_nome" type="text" class="form-control" placeholder="Nome do Produto" maxlength="200" tabindex="1" required autofocus>
+                            <label for="prd_nome">Nome</label>
+                            <input id="prd_nome" name="prd_nome" type="text" class="form-control" placeholder="Nome do Produto" maxlength="200" tabindex="1" required autofocus>
                             <div class="invalid-feedback">
                                 Por favor, digite o Nome do Produto
                             </div>
@@ -42,8 +42,8 @@
                             </div>
 
                             <div class="form-group col-md-2">
-                                <label for="pro_quantidade">Quantidade</label>
-                                <input id="pro_quantidade" name="pro_quantidade" class="form-control" value="0" min="0" type="number" tabindex="4" />
+                                <label for="prd_quantidade">Quantidade</label>
+                                <input id="prd_quantidade" name="prd_quantidade" class="form-control" value="0" min="0" type="number" tabindex="4" />
                             </div>                            
                         </div>
 
@@ -51,27 +51,27 @@
                             <div class="form-group col-md-12">
                                 <div class="form-group">
                                     <label>Descrição</label>
-                                    <textarea class="form-control" maxlength="2000" tabindex="5"></textarea>
+                                    <textarea id="prd_descricao" name="prd_descricao" class="form-control" maxlength="2000" tabindex="5"></textarea>
                                 </div>
                             </div>
                         </div>
                         
-                        <div class="form-row">
+                        <!-- <div class="form-row">
                             <div class="form-group col-md-6">
                                 <div class="section-title">Imagem do Padão</div>
-                                <input id="imagemPadrao" name="imagemPadrao" type="file" multiple ="form-control">
+                                <input id="imagemPadrao" name="imagemPadrao" type="file" accept="image/*" class="form-control">
                             </div>
 
                             <div class="form-group col-md-6">
                                 <div class="section-title">Imagens do Produto</div>
-                                <input id="imagensProduto" name="imagensProduto" type="file" multiple ="form-control">
+                                <input id="imagensProduto" name="imagensProduto" type="file" accept="image/*" multiple class="form-control">
                             </div>
-
-                        </div>  
+                        </div>   -->
 
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                    <div class="form-check">
+                                    <input type="hidden" name="usr_ativo" value="1">
                                     <input id="usr_ativo" name="usr_ativo" class="form-check-input" type="checkbox" checked disabled>
                                     <label class="form-check-label" for="usr_ativo">
                                         Ativo
@@ -144,6 +144,25 @@
         this.value = parseFloat(this.value).toFixed(1);
 
     }
+
+    const imagemPadrao = document.getElementById('imagemPadrao');
+
+    imagemPadrao.onchange = function(e) {
+        const ext = this.value.match(/\.([^\.]+)$/)[1];
+
+        switch (ext) {
+            case 'jpg':
+            case 'bmp':
+            case 'png':
+            case 'tif':
+            break;
+            default:
+            swal("Atenção!", "Arquivo selecionado não é válido", "warning")
+            .then((value) => {
+                this.value = '';
+            });
+        }
+    };
 
   </script>
 

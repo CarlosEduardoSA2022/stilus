@@ -36,5 +36,7 @@ $routes->group('produto', ['namespace' => 'App\Controllers\Backend'], static fun
 
     $routes->get('lista', 'ProdutoController::index', ['as' => 'back.product.index']);
 
+    $routes->post('novo', 'ProdutoController::store', ['as' => 'back.product.store']);
+
 
 });

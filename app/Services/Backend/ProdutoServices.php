@@ -22,4 +22,11 @@ class ProdutoServices
     {
         return $this->produtoModel->orderBy('prd_id', 'DESC')->findAll();
     }
+
+    public function store(array $product): array
+    {
+        if(!$id = $this->produtoModel->insert($product)) return $this->produtoModel->errors();
+
+        return ['prd_id' => $id, 'success' => true];
+    }    
 }

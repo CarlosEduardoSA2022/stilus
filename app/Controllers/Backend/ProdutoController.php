@@ -29,5 +29,17 @@ class ProdutoController extends BaseController
     public function create()
     {
         return view('backend/product/create');
+    }
+
+    public function store()
+    {
+        $payLoad = $this->request->getPost();
+
+        $this->produtoService->store($payLoad);
+
+        $this->session->setFlashdata('sucesso', '<div style="margin-top: 15px;"  class="alert alert-success">
+        <div class="alert-title">Sucesso</div>Usuário cadastrado com sucesso!</div>');  
+        
+        return redirect()->back();
     }    
 }
