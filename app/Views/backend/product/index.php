@@ -13,7 +13,6 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('page-body')?> 
-
     <h2 class="section-title">Lista de produtos</h2>
 
     <div class="row">
@@ -70,5 +69,11 @@
 
   <!-- Page Specific JS File -->
   <?= $this->include('backend/product/inc/_index'); ?>
+
+  <?php
+        if(session('sucesso')){
+            echo "<script>swal({title: 'Sucesso',text: 'Produto cadastrado com sucesso!',icon: 'success',button: false, timer: 3000,});</script>";
+        }
+    ?>  
 
 <?= $this->endSection() ?>

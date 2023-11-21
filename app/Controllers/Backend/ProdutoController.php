@@ -139,9 +139,11 @@ class ProdutoController extends BaseController
             }
         }
 
-        $this->session->setFlashdata('sucesso', '<div style="margin-top: 15px;"  class="alert alert-success">
-        <div class="alert-title">Sucesso</div>Produto cadastrado com sucesso!</div>');  
+        // $this->session->setFlashdata('sucesso', '<div style="margin-top: 15px;"  class="alert alert-success">
+        // <div class="alert-title">Sucesso</div>Produto cadastrado com sucesso!</div>');  
         
-        return redirect()->back();
+        $this->session->setFlashdata('sucesso', 'sucesso');
+
+        return redirect()->to(base_url('produto/lista'));
     }    
 }
