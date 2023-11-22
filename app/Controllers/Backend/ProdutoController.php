@@ -28,6 +28,8 @@ class ProdutoController extends BaseController
 
     public function create()
     {
+        if(session('userInfo')->usr_usuario_tipo_id != 1) return redirect()->back();
+
         return view('backend/product/create');
     }
 
@@ -162,6 +164,11 @@ class ProdutoController extends BaseController
         return view('backend/product/edit', $payLoad);
     }
 
+    public function updateStatusProduct(int $id)
+    {
+        $this->produtoService->updateStatusProduct($id);
+    }    
+
     public function updateStatusProductImage(int $idImage)
     {
         $this->produtoService->updateStatusProductImage($idImage);
@@ -173,9 +180,11 @@ class ProdutoController extends BaseController
 
         $productId = $payLoad['prd_id'];
 
-        $payLoad['prd_preco'] =  str_replace(",",".", $payLoad['prd_preco']);
+        if(isset($payLoad['prd_preco']))
+            $payLoad['prd_preco'] =  str_replace(",",".", $payLoad['prd_preco']);
 
-        $payLoad['prd_ativo'] = $payLoad['prd_ativo'] == '0' ? 0 : 1;
+        if(isset($payLoad['prd_ativo']))
+            $payLoad['prd_ativo'] = $payLoad['prd_ativo'] == '0' ? 0 : 1;
 
         unset($payLoad['prd_id']);
 
@@ -207,7 +216,7 @@ class ProdutoController extends BaseController
             }
         }
 
-        if($imagemsProduto[0]->getName() != ''){
+        if($imagemsProduto && $imagemsProduto[0]->getName() != ''){
 
             foreach ($imagemsProduto as $imagem) {
                 

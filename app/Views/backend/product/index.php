@@ -19,9 +19,11 @@
         <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <a href="<?= route_to('back.product.create')?>" class="btn btn-primary btn-icon icon-left">
-                    <i class="fas fa-plus"></i>Novo Produto
-                </a>
+                <?php if(session('userInfo')->usr_usuario_tipo_id == 1): ?>
+                    <a href="<?= route_to('back.product.create')?>" class="btn btn-primary btn-icon icon-left">
+                        <i class="fas fa-plus"></i>Novo Produto
+                    </a>
+                <?php endif; ?>
             </div>
             <div class="card-body">
             <div class="table-responsive">
@@ -44,7 +46,12 @@
                             <td><?= $product->prd_nome ?></td>
                             <td><?= $product->prd_quantidade ?></td>
                             <td><?= 'R$ ' . number_format($product->prd_preco, 2, ',', '.') ?></td>
-                            <td><?= $product->prd_ativo ?></td>
+
+                            <td>
+                                <div class="form-check">
+                                    <input id="<?= $product->prd_id ?>" onclick="activeProduct(this, <?= $product->prd_id ?>)" <?= $product->prd_ativo == 1 ? 'Checked' : '' ?> <?= session('userInfo')->usr_usuario_tipo_id != 1 ? 'disabled' : '' ?> class="form-check-input" type="checkbox">
+                                </div>
+                            </td>                            
 
                             <td>
                                 <a href="<?= route_to('back.product.edit', $product->prd_id)?>" class="btn btn-secondary">Alterar</a>
@@ -69,6 +76,7 @@
 
   <!-- Page Specific JS File -->
   <?= $this->include('backend/product/inc/_index'); ?>
+  <?= $this->include('backend/product/inc/_update'); ?>  
 
   <?php
         if(session('sucesso')){

@@ -40,7 +40,9 @@ $routes->group('produto', ['namespace' => 'App\Controllers\Backend'], static fun
 
     $routes->post('alterar', 'ProdutoController::update', ['as' => 'back.product.update']);
 
-    $routes->post('ativa-inativa/(:num)', 'ProdutoController::updateStatusProductImage/$1', ['as' => 'back.product.ativar']);    
+    $routes->post('ativa-inativa/(:num)', 'ProdutoController::updateStatusProduct/$1', ['as' => 'back.product.ativar']);    
+
+    $routes->post('ativa-inativa-imagem/(:num)', 'ProdutoController::updateStatusProductImage/$1', ['as' => 'back.product.imagem.ativar']);    
 
     $routes->get('alterar/(:num)', 'ProdutoController::edit/$1', ['as' => 'back.product.edit']);
 });

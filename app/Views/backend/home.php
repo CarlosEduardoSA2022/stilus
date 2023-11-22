@@ -17,9 +17,7 @@
             <h4>Comunicado</h4>
         </div>
         <div class="card-body">
-            <p>Está avisado {*-*} .</p>
-
-            <p>Está Logado: <?= session('loggedIn');?></p>
+            <p>O fim do ano está chegando...  Avisado {*-*} .</p>
         </div>
     </div>
 

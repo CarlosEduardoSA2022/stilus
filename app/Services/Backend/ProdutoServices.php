@@ -42,6 +42,13 @@ class ProdutoServices
         return ['success' => true];
     }
 
+    public function updateStatusProduct(int $id)
+    {
+        $product = $this->produtoModel->find($id);
+
+        $this->produtoModel->where('prd_id', $id)->set('prd_ativo', !$product->prd_ativo)->update();
+    }
+
     public function storeImage(array $image): array
     {
         if(!$id = $this->imagemModel->insert($image)) return ['errors' => $this->imagemModel->errors(), 'success' => false];

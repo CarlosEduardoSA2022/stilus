@@ -30,6 +30,8 @@ class UserController extends BaseController
 
     public function adicionar()
     {
+        if(session('userInfo')->usr_usuario_tipo_id != 1) return redirect()->back();
+        
         return view('backend/user/create');
     }
 
