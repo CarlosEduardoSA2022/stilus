@@ -72,7 +72,7 @@
 
   <?php
         if(session('sucesso')){
-            echo "<script>swal({title: 'Sucesso',text: 'Produto cadastrado com sucesso!',icon: 'success',button: false, timer: 3000,});</script>";
+            echo "<script>swal({title: 'Sucesso',text: 'Operação realizada com sucesso!',icon: 'success',button: false, timer: 3000,});</script>";
         }
     ?>  
 

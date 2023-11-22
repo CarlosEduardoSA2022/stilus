@@ -171,8 +171,94 @@ class ProdutoController extends BaseController
     {
         $payLoad = $this->request->getPost();
 
-        $img = $this->request->getFile('timg25');
+        $productId = $payLoad['prd_id'];
 
-        dd($payLoad);
+        $payLoad['prd_preco'] =  str_replace(",",".", $payLoad['prd_preco']);
+
+        $payLoad['prd_ativo'] = $payLoad['prd_ativo'] == '0' ? 0 : 1;
+
+        unset($payLoad['prd_id']);
+
+        $this->produtoService->update($productId, $payLoad);
+
+        $imagemPadrao = $this->request->getFile('imagemPadrao');
+
+        $imagemsProduto = $this->request->getFileMultiple('imagensProduto');
+
+        $caminhoImagem = base_url().'uploads/products/';
+
+        if($imagemPadrao && $imagemPadrao->getName() != '') {
+
+            $nomeImagemPadrao = $imagemPadrao->getRandomName();
+
+            if ($imagemPadrao->isValid() && !$imagemPadrao->hasMoved()) {
+
+                $newImageDefault = [
+                    'pri_produto_id'        => $productId,
+                    'pri_caminho_imagem'    => $caminhoImagem,
+                    'pri_nome_imagem'       => $nomeImagemPadrao,
+                    'pri_padrao'            => 1,
+                    'pri_ativa'             => 1
+                ];
+
+                $imagemPadrao->store('../../public/uploads/products', $nomeImagemPadrao);
+    
+                $this->produtoService->storeImage($newImageDefault);                
+            }
+        }
+
+        if($imagemsProduto[0]->getName() != ''){
+
+            foreach ($imagemsProduto as $imagem) {
+                
+                if ($imagem->isValid() && !$imagem->hasMoved()){
+
+                    $nomeImagem = $imagem->getRandomName();
+
+                    $newImage = [
+                        'pri_produto_id'        => $productId,
+                        'pri_caminho_imagem'    => $caminhoImagem,
+                        'pri_nome_imagem'       => $nomeImagem,
+                        'pri_padrao'            => 0,
+                        'pri_ativa'             => 1
+                    ];   
+
+                    $imagem->store('../../public/uploads/products', $nomeImagem);
+
+                    $this->produtoService->storeImage($newImage);
+                }
+            }
+        }
+
+        $productImages = $this->produtoService->getImagesByProductId($productId);
+
+        foreach ($productImages as $productImage) {
+            
+            $imageProduct = $this->request->getFile('timg'.$productImage->pri_id);
+
+            if($imageProduct && $imageProduct->getName() != '') {
+
+                unlink("uploads/products/". $productImage->pri_nome_imagem );
+
+                $nomeImagem = $imageProduct->getRandomName();
+
+                if ($imageProduct->isValid() && !$imageProduct->hasMoved()) {
+
+                    $imageProduct->store('../../public/uploads/products', $nomeImagem);
+
+                    $newImageDefault = [
+                        'pri_nome_imagem'       => $nomeImagem,
+                        'pri_padrao'            => $productImage->pri_padrao,
+                        'pri_ativa'             => $productImage->pri_ativa
+                    ];
+        
+                    $this->produtoService->updateImage($productImage->pri_id, $newImageDefault);                    
+                }
+            }
+        }
+
+        $this->session->setFlashdata('sucesso', 'Produto atualizado com sucesso');
+
+        return redirect()->to(base_url('produto/lista'));
     }
 }

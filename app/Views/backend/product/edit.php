@@ -91,7 +91,6 @@
                                 <?php foreach ($productImages as $productImage): ?>
                                     <div class="col-12 col-sm-6 col-md-6 col-lg-3">
                                         <article class="article">
-                                        <input type="hidden" name="pri_id" value="<?= $productImage->pri_id ?>">
                                         <div class="article-header">
                                             <img id="<?= 'img' . $productImage->pri_id ?>" class="article-image" src="<?= $productImage->pri_caminho_imagem . $productImage->pri_nome_imagem?>" alt="">
                                         </div>
