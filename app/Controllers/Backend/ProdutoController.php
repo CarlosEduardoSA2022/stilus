@@ -138,12 +138,41 @@ class ProdutoController extends BaseController
                 return redirect()->back();
             }
         }
-
-        // $this->session->setFlashdata('sucesso', '<div style="margin-top: 15px;"  class="alert alert-success">
-        // <div class="alert-title">Sucesso</div>Produto cadastrado com sucesso!</div>');  
         
-        $this->session->setFlashdata('sucesso', 'sucesso');
+        $this->session->setFlashdata('sucesso', 'Produto inserido com sucesso');
 
         return redirect()->to(base_url('produto/lista'));
+    }
+
+    public function edit(int $productId)
+    {
+        if(!session()->has('loggedIn')) return redirect()->route('back.login');
+
+        $product = $this->produtoService->getById($productId);
+
+        if(!$product) return redirect()->back();
+
+        $productImages = $this->produtoService->getImagesByProductId($productId);
+
+        $payLoad = [
+            'product'       => $product,
+            'productImages' => $productImages
+        ];
+
+        return view('backend/product/edit', $payLoad);
+    }
+
+    public function updateStatusProductImage(int $idImage)
+    {
+        $this->produtoService->updateStatusProductImage($idImage);
     }    
+
+    public function update()
+    {
+        $payLoad = $this->request->getPost();
+
+        $img = $this->request->getFile('timg25');
+
+        dd($payLoad);
+    }
 }

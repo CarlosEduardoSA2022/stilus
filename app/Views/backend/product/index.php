@@ -47,7 +47,7 @@
                             <td><?= $product->prd_ativo ?></td>
 
                             <td>
-                                <a href="#" class="btn btn-secondary">Alterar</a>
+                                <a href="<?= route_to('back.product.edit', $product->prd_id)?>" class="btn btn-secondary">Alterar</a>
                             </td>
                         </tr>
                     <?php endforeach; ?>

@@ -4,45 +4,33 @@ $(()=>{
 })
 
 
-function activeUser (userCheck, userId) {
+const activeImage = imageCheck => {
 
-    const baseUrl = "<?= base_url('usuario/ativa-inativa/') ?>" + userId;
+    const txtAcao = $(imageCheck).is(":checked") ? 'Imagem ativada com sucesso' : 'Imagem inativada com sucesso';
+
+    const baseUrl = "<?= base_url('produto/ativa-inativa/') ?>" + imageCheck.id;
 
     let _data = { }
 
-    const txtMensage = $(userCheck).is(":checked") ? 'Tem certeza que deseja Ativar esse usuário?' : 'Tem certeza que deseja Desativar esse usuário?';
-
-    swal({
-      title: 'Atenção',
-      text: txtMensage,
-      icon: 'warning',
-      buttons: true,
-      dangerMode: true,
-      buttons: ["Não, cancelar.", "Sim, confirmar."],
-    })
-    .then((willDelete) => {
-      if (willDelete) {
-
-        fetch(baseUrl, {
+    fetch(baseUrl, {
             method: "POST",
             dataType: 'json',
             body: JSON.stringify(_data),
             headers: {"Content-type": "application/json; charset=UTF-8"},
-        })
+      })
 
-        .then(response => response.text())
+      .then(response => ()=> {
+          response.text();
+      })
+      .catch(err => console.log(err));
 
-        .catch(err => console.log(err));
-
-      swal('Operação realizada com sucesso!', {
-        icon: 'success',
+      swal({
+            title: 'Sucesso',
+            text: txtAcao,
+            icon: 'success',
+            button: true, 
+            imer: 3000
       });
-      } else {
-
-        if($(userCheck).is(":checked")) $(userCheck).prop('checked', false);
-            else $(userCheck).prop('checked', true);
-      }
-    });
 }
 
 </script>
