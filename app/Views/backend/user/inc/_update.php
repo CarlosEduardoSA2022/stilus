@@ -6,7 +6,7 @@ $(()=>{
 
 function activeUser (userCheck, userId) {
 
-    const baseUrl = "<?= base_url('usuario/ativa-inativa/') ?>" + userId;
+    const baseUrl = "<?= base_url('backoffice/usuario/ativa-inativa/') ?>" + userId;
 
     let _data = { }
 

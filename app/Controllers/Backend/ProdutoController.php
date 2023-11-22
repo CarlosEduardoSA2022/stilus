@@ -37,6 +37,9 @@ class ProdutoController extends BaseController
     {
         $payLoad = $this->request->getPost();
 
+        if(isset($payLoad['prd_preco']))
+            $payLoad['prd_preco'] =  str_replace(",",".", $payLoad['prd_preco']);
+
         $productNew = $this->produtoService->store($payLoad);
 
         if(!$productNew['success']){
@@ -143,7 +146,7 @@ class ProdutoController extends BaseController
         
         $this->session->setFlashdata('sucesso', 'Produto inserido com sucesso');
 
-        return redirect()->to(base_url('produto/lista'));
+        return redirect()->route('back.product.index');
     }
 
     public function edit(int $productId)
@@ -268,6 +271,6 @@ class ProdutoController extends BaseController
 
         $this->session->setFlashdata('sucesso', 'Produto atualizado com sucesso');
 
-        return redirect()->to(base_url('produto/lista'));
+        return redirect()->route('back.product.index');
     }
 }

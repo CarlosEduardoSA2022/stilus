@@ -5,7 +5,7 @@ $(()=>{
 
 function activeProduct (productCheck, productId) {
 
-const baseUrl = "<?= base_url('produto/ativa-inativa/') ?>" + productId;
+const baseUrl = "<?= base_url('backoffice/produto/ativa-inativa/') ?>" + productId;
 
 let _data = { }
 
@@ -48,7 +48,7 @@ const activeImage = imageCheck => {
 
     const txtAcao = $(imageCheck).is(":checked") ? 'Imagem ativada com sucesso' : 'Imagem inativada com sucesso';
 
-    const baseUrl = "<?= base_url('produto/ativa-inativa-imagem/') ?>" + imageCheck.id;
+    const baseUrl = "<?= base_url('backoffice/produto/ativa-inativa-imagem/') ?>" + imageCheck.id;
 
     let _data = { }
 
