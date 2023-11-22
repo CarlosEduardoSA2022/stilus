@@ -6,6 +6,13 @@ use CodeIgniter\Router\RouteCollection;
  * @var RouteCollection $routes
  */
 
+ $routes->get('/', 'Frontend\HomeController::index', ['as' => 'front.index']);
+
+ $routes->group('loja', ['namespace' => 'App\Controllers\Backend'], static function ($routes) {
+
+ });
+
+
  $routes->group('backoffice', ['namespace' => 'App\Controllers\Backend'], static function ($routes) {
 
     $routes->get('', 'Login::index', ['as' => 'back.login']);
