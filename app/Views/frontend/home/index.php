@@ -106,4 +106,14 @@
 
 <?= $this->section('custom-script')?> 
     
+<?php
+    if(session('success')){
+        echo "<script>toastr['success']('Acesso realizado com sucesso.', 'Sucesso!');</script>";
+    }
+
+    if(session('error')){
+        echo "<script>toastr['warning']('Credenciais inválidas, tente novamente ou entre em contato!', 'Atenção!');</script>";
+    }    
+?> 
+
 <?= $this->endSection() ?>

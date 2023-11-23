@@ -32,7 +32,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-7 mx-auto text-center">
-						<h5 class="section-title">Produtos de qualidade</h2>
+						<h5 class="section-title">Galeria de imagens</h5>
 					</div>
 				</div>
 
@@ -74,6 +74,10 @@
 		<div class="we-help-section">
 			<div class="container">
 				<div class="row justify-content-between">
+                    <div class="col-lg-4 ps-lg-4">
+                        <img src="<?= $productImageDefault[0]->pri_caminho_imagem . $productImageDefault[0]->pri_nome_imagem ?>" class="img-fluid">
+                    </div>
+
 					<div class="col-lg-8 ps-lg-8">
 						<h2 class="section-title mb-4"><?= $product->prd_nome?></h2>
                         <small>Por apenas </small> <br>
@@ -83,9 +87,6 @@
 
 						<p><a herf="#" class="btn btn-primary">Comprar agora</a></p>
 					</div>
-                    <div class="col-lg-4 ps-lg-4">
-                        <img src="<?= $productImageDefault[0]->pri_caminho_imagem . $productImageDefault[0]->pri_nome_imagem ?>" class="img-fluid">
-                    </div>
 				</div>
 			</div>
 		</div>

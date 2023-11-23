@@ -40,14 +40,14 @@ class Login extends BaseController
             $this->session->setFlashdata('mensagem', '<div class="alert alert-warning">
             <div class="alert-title">Atenção</div>Credenciais inválidas, tente novamente ou entre em contato!</div>');  
             
-            return redirect()->to(base_url('/'));
+            return redirect()->route('back.login');
         }
 
         if(!$this->passwordCompare($this->request->getPost('senha'), $usuario->usr_senha)){
             $this->session->setFlashdata('mensagem', '<div class="alert alert-warning">
             <div class="alert-title">Atenção</div>Credenciais inválidas, tente novamente ou entre em contato!</div>');  
             
-            return redirect()->to(base_url('/'));            
+            return redirect()->route('back.login');
         }
 
         if($usuario->usr_usuario_tipo_id == 3){
@@ -55,7 +55,7 @@ class Login extends BaseController
             $this->session->setFlashdata('mensagem', '<div class="alert alert-warning">
             <div class="alert-title">Atenção</div>Credenciais inválidas, tente novamente ou entre em contato!</div>');  
             
-            return redirect()->to(base_url('/'));
+            return redirect()->route('back.login');
         }        
 
         $this->setSessionUserLogged($usuario);

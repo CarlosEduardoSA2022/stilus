@@ -8,9 +8,15 @@ use CodeIgniter\Router\RouteCollection;
 
  $routes->get('/', 'Frontend\HomeController::index', ['as' => 'front.index']);
 
+ $routes->get('/minha-conta', 'Frontend\MinhaContaController::index', ['as' => 'front.me.login']);
+
+ $routes->post('/login', 'Frontend\MinhaContaController::doLogin', ['as' => 'front.doLogin']);
+
  $routes->get('/produto/(:num)', 'Frontend\ProductDetailController::detail/$1', ['as' => 'front.product.detail']);
 
- $routes->group('loja', ['namespace' => 'App\Controllers\Backend'], static function ($routes) {
+ $routes->group('loja', ['namespace' => 'App\Controllers\Frontend'], static function ($routes) {
+
+    $routes->get('logout', 'MinhaContaController::doLogOut', ['as' => 'front.doLogout']);
 
  });
 

@@ -11,6 +11,9 @@
         <link href="<?= base_url() ?>assets/frontend/css/tiny-slider.css" rel="stylesheet">
         <link href="<?= base_url() ?>assets/frontend/css/style.css" rel="stylesheet">
 
+        <link href="<?= base_url() ?>assets/frontend/plugins/toastr/css/toastr.min.css" rel="stylesheet">
+
+
         <!-- Custom CSS -->
         <?= $this->renderSection('custom-css')?>        
 
