@@ -48,7 +48,7 @@
                                         <div class="row justify-content-center">
                                             <div class="col-lg-8 mx-auto">
                                                 <div class="text-center">
-                                                    <a class="product-item" href="#">
+                                                    <a class="product-item" href="<?= route_to('front.product.detail', $product->prd_id )?>">
                                                         <img src="<?= $product->pri_caminho_imagem . $product->pri_nome_imagem ?>" class="img-fluid product-thumbnail">
                                                         <h3 class="product-title"><?= $product->prd_nome ?></h3>
                                                         <strong class="product-price"><?= 'R$ ' . number_format($product->prd_preco, 2, ',', '.');  ?></strong>

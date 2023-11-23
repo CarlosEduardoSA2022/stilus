@@ -8,6 +8,8 @@ use CodeIgniter\Router\RouteCollection;
 
  $routes->get('/', 'Frontend\HomeController::index', ['as' => 'front.index']);
 
+ $routes->get('/produto/(:num)', 'Frontend\ProductDetailController::detail/$1', ['as' => 'front.product.detail']);
+
  $routes->group('loja', ['namespace' => 'App\Controllers\Backend'], static function ($routes) {
 
  });

@@ -43,4 +43,16 @@ class ProdutoServices
     {
         return $this->produtoModel->find($id);
     }
+
+    public function getImagesByProductId(int $productId, int $imageDefault = 0)
+    {
+        $conditions = [
+            'pri_produto_id'    => $productId,
+            'pri_padrao'        => $imageDefault
+        ];
+
+        return $this->imagemModel->where($conditions)->orderBy('pri_padrao', 'DESC')->get()->getResult();
+    }    
+
+    
 }
