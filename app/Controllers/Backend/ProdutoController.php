@@ -38,7 +38,7 @@ class ProdutoController extends BaseController
         $payLoad = $this->request->getPost();
 
         if(isset($payLoad['prd_preco']))
-            $payLoad['prd_preco'] =  str_replace(",",".", $payLoad['prd_preco']);
+            $payLoad['prd_preco'] =  str_replace(",",".", str_replace('.', '', $payLoad['prd_preco']));
 
         $productNew = $this->produtoService->store($payLoad);
 
@@ -184,7 +184,7 @@ class ProdutoController extends BaseController
         $productId = $payLoad['prd_id'];
 
         if(isset($payLoad['prd_preco']))
-            $payLoad['prd_preco'] =  str_replace(",",".", $payLoad['prd_preco']);
+            $payLoad['prd_preco'] = str_replace(",",".", str_replace('.', '', $payLoad['prd_preco']));
 
         if(isset($payLoad['prd_ativo']))
             $payLoad['prd_ativo'] = $payLoad['prd_ativo'] == '0' ? 0 : 1;

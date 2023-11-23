@@ -42,15 +42,16 @@
 							</div>
 
 							<div class="testimonial-slider">
+                                <?php foreach ($productsDefault as $product): ?>
                                 <div class="product-section">
                                     <div class="item">
                                         <div class="row justify-content-center">
                                             <div class="col-lg-8 mx-auto">
                                                 <div class="text-center">
-                                                    <a class="product-item" href="cart.html">
-                                                        <img src="<?= base_url() ?>assets/frontend/images/product-1.png" class="img-fluid product-thumbnail">
-                                                        <h3 class="product-title">Nordic Chair</h3>
-                                                        <strong class="product-price">$50.00</strong>
+                                                    <a class="product-item" href="#">
+                                                        <img src="<?= $product->pri_caminho_imagem . $product->pri_nome_imagem ?>" class="img-fluid product-thumbnail">
+                                                        <h3 class="product-title"><?= $product->prd_nome ?></h3>
+                                                        <strong class="product-price"><?= 'R$ ' . number_format($product->prd_preco, 2, ',', '.');  ?></strong>
 
                                                         <span class="icon-cross">
                                                             <img src="<?= base_url() ?>assets/frontend/images/cross.svg" class="img-fluid">
@@ -61,70 +62,8 @@
                                         </div>
                                     </div>
                                 </div>
+                                <?php endforeach; ?>
                                 <!-- END item -->
-
-                                <div class="product-section">
-                                    <div class="item">
-                                        <div class="row justify-content-center">
-                                            <div class="col-lg-8 mx-auto">
-                                                <div class="text-center">
-                                                    <a class="product-item" href="cart.html">
-                                                        <img src="<?= base_url() ?>assets/frontend/images/product-1.png" class="img-fluid product-thumbnail">
-                                                        <h3 class="product-title">Nordic Chair</h3>
-                                                        <strong class="product-price">$50.00</strong>
-
-                                                        <span class="icon-cross">
-                                                            <img src="<?= base_url() ?>assets/frontend/images/cross.svg" class="img-fluid">
-                                                        </span>
-                                                    </a>
-                                                </div> 
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- END item -->
-
-                                <div class="product-section">
-                                    <div class="item">
-                                        <div class="row justify-content-center">
-                                            <div class="col-lg-8 mx-auto">
-                                                <div class="text-center">
-                                                    <a class="product-item" href="cart.html">
-                                                        <img src="<?= base_url() ?>assets/frontend/images/product-1.png" class="img-fluid product-thumbnail">
-                                                        <h3 class="product-title">Nordic Chair</h3>
-                                                        <strong class="product-price">$50.00</strong>
-
-                                                        <span class="icon-cross">
-                                                            <img src="<?= base_url() ?>assets/frontend/images/cross.svg" class="img-fluid">
-                                                        </span>
-                                                    </a>
-                                                </div> 
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- END item -->
-
-                                <div class="product-section">
-                                    <div class="item">
-                                        <div class="row justify-content-center">
-                                            <div class="col-lg-8 mx-auto">
-                                                <div class="text-center">
-                                                    <a class="product-item" href="cart.html">
-                                                        <img src="<?= base_url() ?>assets/frontend/images/product-1.png" class="img-fluid product-thumbnail">
-                                                        <h3 class="product-title">Nordic Chair</h3>
-                                                        <strong class="product-price">$50.00</strong>
-
-                                                        <span class="icon-cross">
-                                                            <img src="<?= base_url() ?>assets/frontend/images/cross.svg" class="img-fluid">
-                                                        </span>
-                                                    </a>
-                                                </div> 
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- END item -->                                
 
 							</div>
 
