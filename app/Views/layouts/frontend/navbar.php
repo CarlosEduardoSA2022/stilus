@@ -11,11 +11,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="<?= route_to('front.index')?>">Home</a>
                 </li>
-                <li><a class="nav-link" href="shop.html">Shop</a></li>
-                <li><a class="nav-link" href="about.html">About us</a></li>
-                <li><a class="nav-link" href="services.html">Services</a></li>
-                <li><a class="nav-link" href="blog.html">Blog</a></li>
-                <li><a class="nav-link" href="contact.html">Contact us</a></li>
+                <li><a class="nav-link" href="#">Produtos</a></li>
+                <li><a class="nav-link" href="#">Sobre</a></li>
+                <li><a class="nav-link" href="#">Contato</a></li>
             </ul>
 
             <ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
