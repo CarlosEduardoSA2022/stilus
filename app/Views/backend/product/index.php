@@ -54,7 +54,9 @@
                             </td>                            
 
                             <td>
-                                <a href="<?= route_to('back.product.edit', $product->prd_id)?>" class="btn btn-secondary">Alterar</a>
+                                <a href="<?= route_to('back.product.edit', $product->prd_id)?>" class="btn btn-icon btn-secondary "><i class="far fa-edit"></i></a>
+                                <a href="<?= route_to('front.product.detail', $product->prd_id)?>" title="Ver produto na loja" target="_blank" class="btn btn-icon btn-info"><i class="far fa-eye"></i></a>
+
                             </td>
                         </tr>
                     <?php endforeach; ?>
