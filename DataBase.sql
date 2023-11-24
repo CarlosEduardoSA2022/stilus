@@ -129,7 +129,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (1,'José da Silva','jose@silva.com','11111111111','$2y$10$fGziUjx0Zn06SZVOYy07S.RjdUgme5jyqP9RxKZLXobYHZZXMCSpi',1,1),(2,'Maria da Silva','maria@silva.com','22222222222','$2y$10$fGziUjx0Zn06SZVOYy07S.RjdUgme5jyqP9RxKZLXobYHZZXMCSpi',2,1),(3,'João da Silva','joao@silva.com','33333333333','$2y$10$fGziUjx0Zn06SZVOYy07S.RjdUgme5jyqP9RxKZLXobYHZZXMCSpi',3,0);
+INSERT INTO `usuario` VALUES (1,'Administrador do Sistema','admin@mail.com','11111111111','$2y$10$fGziUjx0Zn06SZVOYy07S.RjdUgme5jyqP9RxKZLXobYHZZXMCSpi',1,1),(2,'Estoquista','estoquista@mail.com','22222222222','$2y$10$fGziUjx0Zn06SZVOYy07S.RjdUgme5jyqP9RxKZLXobYHZZXMCSpi',2,1),(3,'João da Silva','joao@silva.com','33333333333','$2y$10$fGziUjx0Zn06SZVOYy07S.RjdUgme5jyqP9RxKZLXobYHZZXMCSpi',3,0);
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
